@@ -1,3 +1,92 @@
-<p>
-  table works!
-</p>
+<p-table
+  [value]="campaigns"
+  [paginator]="true"
+  [rows]="quantityRows"
+  [rowsPerPageOptions]="paginationOptions"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id" style="width: 20%">
+        Id <p-sortIcon field="id" />
+      </th>
+      <th pSortableColumn="campaign_name" style="width: 20%">
+        Campaign <p-sortIcon field="campaign_name" />
+      </th>
+      <th pSortableColumn="start_date" style="width: 20%">
+        Start Date <p-sortIcon field="start_date" />
+      </th>
+      <th pSortableColumn="end_date" style="width: 20%">
+        End Date <p-sortIcon field="end_date" />
+      </th>
+      <th pSortableColumn="created_at" style="width: 20%">
+        Created at <p-sortIcon field="created_at" />
+      </th>
+      <th pSortableColumn="updated_at" style="width: 20%">
+        Updated at <p-sortIcon field="updated_at" />
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="id"
+          placeholder="Search by ID"
+          ariaLabel="Filter by ID"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="campaign_name"
+          placeholder="Search by Campaign name"
+          ariaLabel="Filter by campaign name"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="start_date"
+          placeholder="Search by start date"
+          ariaLabel="Filter by start date"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="end_date"
+          placeholder="Search by end date"
+          ariaLabel="Filter by end date"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="created_at"
+          placeholder="Search by created at"
+          ariaLabel="Filter by created at"
+        />
+      </th>
+      <th>
+        <p-columnFilter
+          type="text"
+          field="updated_at"
+          placeholder="Search by updated at"
+          ariaLabel="Filter by updated at"
+        />
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-campaign>
+    <tr>
+      <td>{{ campaign.id }}</td>
+      <td>{{ campaign.campaign_name }}</td>
+      <td>{{ campaign.start_date }}</td>
+      <td>{{ campaign.end_date }}</td>
+      <td>{{ campaign.created_at }}</td>
+      <td>{{ campaign.updated_at }}</td>
+    </tr>
+  </ng-template>
+</p-table>
