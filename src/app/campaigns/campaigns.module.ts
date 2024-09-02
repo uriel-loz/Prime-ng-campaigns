@@ -5,7 +5,8 @@ import { CampaignsComponent } from './pages/campaigns/campaigns.component';
 import { TableComponent } from './components/table/table.component';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   imports: [
@@ -13,6 +14,8 @@ import { TableModule } from 'primeng/table';
     CampaignsRoutingModule,
     CardModule,
     TableModule,
+    ToolbarModule,
+    ButtonModule
   ],
   declarations: [
     CampaignsComponent,

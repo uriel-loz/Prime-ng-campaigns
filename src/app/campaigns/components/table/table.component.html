@@ -1,3 +1,18 @@
+<p-toolbar styleClass="mb-4 gap-2">
+  <ng-template pTemplate="left">
+    <p-button severity="help" label="Export" icon="pi pi-upload" />
+  </ng-template>
+  <ng-template pTemplate="right">
+    <p-button
+      severity="success"
+      label="New"
+      icon="pi pi-plus"
+      class="mr-2"
+      (onClick)="openModal()"
+    />
+  </ng-template>
+</p-toolbar>
+
 <p-table
   [value]="campaigns"
   [paginator]="true"
@@ -5,7 +20,15 @@
   [rowsPerPageOptions]="paginationOptions"
   [sortField]="sortField"
   [sortOrder]="sortOrder"
+  styleClass="p-datatable-striped"
   [tableStyle]="{ 'min-width': '50rem' }"
+  [rowHover]="true"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [loading]="loading"
+  [lazy]="true"
+  (onLazyLoad)="loadLazy($event)"
 >
   <ng-template pTemplate="header">
     <tr>
