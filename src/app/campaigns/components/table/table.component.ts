@@ -1,16 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Campaign, Pagination } from '../../interfaces/campaigns.interface';
+import { AfterContentInit, Component, inject, OnInit } from '@angular/core';
+import { Campaign } from '../../interfaces/campaigns.interface';
 import { CampaignsService } from '../../services/campaigns.service';
 import { TableLazyLoadEvent } from 'primeng/table';
 import { finalize } from 'rxjs';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'campaigns-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, AfterContentInit {
   private campaignService = inject(CampaignsService);
+  private sharedService = inject(SharedService);
   public campaigns: Campaign[] = [];
   public loading: boolean = false;
   public paginationOptions: (number | {showAll: string})[] = [10, 20, 50, {showAll:'All'}];
@@ -21,11 +23,6 @@ export class TableComponent implements OnInit {
   public totalRecords!: number;
   public first!: number;
   public last!: number;
-
-  ngOnInit() {
-    this.loading = true;
-    this.getCampaigns(this.initialPage, this.quantityRows, this.sortField, this.sortOrder);
-  }
 
   getCampaigns(page: number, quantityRows: number, sortField: string, sortOrder: number) {
     this.campaignService.getCampaigns(page, quantityRows, sortField, sortOrder)
@@ -48,8 +45,14 @@ export class TableComponent implements OnInit {
     this.getCampaigns(page, size, sortFieldSet, sortOrder ?? this.sortOrder);
   }
 
-  openModal() {
-
+  ngOnInit() {
+    this.loading = true;
+    this.getCampaigns(this.initialPage, this.quantityRows, this.sortField, this.sortOrder);
   }
 
+  ngAfterContentInit(): void {
+    this.sharedService.invokeRefresh$.subscribe(() => {
+      this.getCampaigns(this.initialPage, this.quantityRows, this.sortField, this.sortOrder);
+    })
+  }
 }

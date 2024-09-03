@@ -7,6 +7,11 @@ import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { AddComponent } from './components/add/add.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,11 +20,16 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     TableModule,
     ToolbarModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    FloatLabelModule,
+    ReactiveFormsModule
   ],
   declarations: [
     CampaignsComponent,
-    TableComponent
+    TableComponent,
+    AddComponent
   ]
 })
 export class CampaignsModule { }
